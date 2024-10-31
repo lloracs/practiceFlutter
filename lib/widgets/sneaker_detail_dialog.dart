@@ -25,7 +25,7 @@ class SneakerDetailDialog extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const Text('Add to Cart'),
+            child: const Text('Добавить'),
           ),
         ],
       ),

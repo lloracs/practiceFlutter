@@ -13,12 +13,12 @@ class SneakerShopApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(        
+      theme: ThemeData(
         useMaterial3: true,
         textTheme: Theme.of(context).textTheme.apply(
-          bodyColor: Colors.white,
-        ),
-        iconTheme: const IconThemeData(color: Colors.white)
+              bodyColor: Colors.white,
+            ),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       home: const HomePage(),
     );
@@ -37,14 +37,21 @@ class _HomePageState extends State<HomePage> {
 
   static const List<Widget> _pages = <Widget>[
     AccountScreen(),
-    SneakerListScreen(),    
-    CartScreen(),
+    SneakerListScreen(),
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (index == 2) {
+      // Открываем CartScreen как отдельную страницу
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const CartScreen()),
+      );
+    } else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
   }
 
   @override
@@ -59,7 +66,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         child: Center(
-          child: _pages.elementAt(_selectedIndex),
+          child: _pages.elementAt(_selectedIndex), // Индекс всегда в диапазоне 0 или 1
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -79,9 +86,9 @@ class _HomePageState extends State<HomePage> {
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        selectedItemColor: Colors.white,     
-        unselectedItemColor: const Color.fromARGB(255, 214, 214, 214),    
-        backgroundColor: const Color.fromARGB(255, 0, 17, 255),      
+        selectedItemColor: Colors.white,
+        unselectedItemColor: const Color.fromARGB(255, 214, 214, 214),
+        backgroundColor: const Color.fromARGB(255, 0, 17, 255),
       ),
     );
   }
